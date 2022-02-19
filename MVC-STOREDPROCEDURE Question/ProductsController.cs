@@ -124,8 +124,8 @@ namespace DotNetExam.Controllers
             conn.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from Products where ProductId = @ProductId";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "ViewProductUsingId";
             cmd.Parameters.AddWithValue("@ProductId", id);
             try
             {
@@ -159,9 +159,13 @@ namespace DotNetExam.Controllers
                     conn.Open();
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = "Update Products set ProductName=@ProductName,Rate=@Rate,Description=@Description,CategoryName=@CategoryName where ProductId=@ProductId";
-                    
+                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "EditProduct";
+                    cmd.Parameters.AddWithValue("@ProductId", id);
+                    cmd.Parameters.AddWithValue("@ProductName", pro.ProductName);
+                    cmd.Parameters.AddWithValue("@Rate", pro.Rate);
+                    cmd.Parameters.AddWithValue("@Description", pro.Description);
+                    cmd.Parameters.AddWithValue("@CategoryName", pro.CategoryName);
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
