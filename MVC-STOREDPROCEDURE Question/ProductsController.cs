@@ -19,8 +19,8 @@ namespace DotNetExam.Controllers
             conn.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from Products";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "ViewAllProducts";
             SqlDataReader dreader = cmd.ExecuteReader();
 
             while (dreader.Read())
@@ -50,7 +50,8 @@ namespace DotNetExam.Controllers
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from Products where ProductId = @ProductId";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "ViewProductUsingId";
             cmd.Parameters.AddWithValue("@ProductId", id);
             try
             {
